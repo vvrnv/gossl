@@ -6,7 +6,7 @@ simple CLI app for checking SSL certificates
 
 ## homebrew
 ```sh
-todo
+brew install vvrnv/tap/gossl
 ```
 
 ## go
