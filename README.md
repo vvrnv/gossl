@@ -11,7 +11,7 @@ todo
 
 ## go
 ```sh
-go install github/vvrnv/gossl@latest
+go install github.com/vvrnv/gossl@latest
 ```
 
 ## download binary

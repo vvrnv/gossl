@@ -33,7 +33,18 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
-
+brews:
+  - tap:
+      owner: vvrnv
+      name: homebrew-tap
+    folder: Formula
+    goarm: "7"
+    homepage: https://vvrnv.github.io
+    description: simple CLI app for checking SSL certificates
+    license: MIT
+    commit_author:
+      name: vvrnv
+      email: valeravoronov96@gmail.com    
 # modelines, feel free to remove those if you don't want/use them:
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
