@@ -13,10 +13,10 @@ var verifyCmd = &cobra.Command{
 	Use:   "verify",
 	Short: "verify SSL certificate",
 	Long: `verify SSL certificate with domain name or ip address.
-For example:
 
-gossl verify -s domain.com
-gossl verify --server 8.8.8.8`,
+For example:
+  gossl verify -s domain.com
+  gossl verify --server 8.8.8.8`,
 	Run: func(_ *cobra.Command, args []string) {
 
 		ips, err := ip.GetIPV4(server)
