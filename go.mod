@@ -3,7 +3,7 @@ module github.com/vvrnv/gossl
 go 1.19
 
 require (
-	github.com/fatih/color v1.14.0
+	github.com/fatih/color v1.14.1
 	github.com/spf13/cobra v1.6.1
 	go.uber.org/zap v1.24.0
 )
