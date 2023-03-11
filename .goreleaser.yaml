@@ -41,7 +41,7 @@ brews:
       name: homebrew-tap
     folder: Formula
     goarm: "7"
-    homepage: https://vvrnv.github.io
+    homepage: https://vvrnv.dev
     description: simple CLI app for checking SSL certificates
     license: MIT
     commit_author:
