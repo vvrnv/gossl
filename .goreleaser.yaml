@@ -7,6 +7,8 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
+    ldflags:
+    - -X github.com/vvrnv/gossl/cmd.Version={{ .Version }} -X github.com/vvrnv/gossl/cmd.Os={{ .Runtime.Goos }} -X github.com/vvrnv/gossl/cmd.Arch={{ .Runtime.Goarch }} -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
     goos:
       - linux
       - windows
