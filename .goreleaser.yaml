@@ -5,20 +5,90 @@ before:
     # You may remove this if you don't use go modules.
     - go mod tidy
 builds:
-  - env:
-      - CGO_ENABLED=0
-    ldflags:
-    - -X github.com/vvrnv/gossl/cmd.Version={{ .Version }} -X github.com/vvrnv/gossl/cmd.Os={{ .Runtime.Goos }} -X github.com/vvrnv/gossl/cmd.Arch={{ .Runtime.Goarch }} -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
+  - id: gossl-linux-amd
+    binary: gossl
     goos:
       - linux
-      - windows
+    goarch:
+      - amd64
+    ldflags:
+    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
+    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
+    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
+    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
+    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
+    env:
+      - CGO_ENABLED=0
+      - ARCH=amd64
+      - OS=linux
+
+  - id: gossl-linux-arm
+    binary: gossl
+    goos:
+      - linux
+    goarch:
+      - arm64
+    ldflags:
+    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
+    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
+    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
+    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
+    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
+    env:
+      - CGO_ENABLED=0
+      - ARCH=arm64
+      - OS=linux
+
+  - id: gossl-darwin-amd
+    binary: gossl
+    goos:
       - darwin
     goarch:
       - amd64
+    ldflags:
+    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
+    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
+    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
+    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
+    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
+    env:
+      - CGO_ENABLED=0
+      - ARCH=amd64
+      - OS=darwin
+
+  - id: gossl-darwin-arm
+    binary: gossl
+    goos:
+      - darwin
+    goarch:
       - arm64
-    ignore:
-      - goos: windows
-        goarch: arm64      
+    ldflags:
+    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
+    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
+    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
+    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
+    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
+    env:
+      - CGO_ENABLED=0
+      - ARCH=arm64
+      - OS=darwin
+
+  - id: gossl-windows-amd
+    binary: gossl
+    goos:
+      - windows
+    goarch:
+      - arm64
+    ldflags:
+    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
+    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
+    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
+    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
+    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
+    env:
+      - CGO_ENABLED=0
+      - ARCH=amd64
+      - OS=windows
 archives:
   - replacements:
       darwin: Darwin
@@ -46,7 +116,7 @@ brews:
     license: MIT
     commit_author:
       name: vvrnv
-      email: valeravoronov96@gmail.com    
+      email: valeravoronov96@gmail.com
 # modelines, feel free to remove those if you don't want/use them:
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj

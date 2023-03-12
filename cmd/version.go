@@ -14,6 +14,7 @@ var (
 	Version string
 	Os      string
 	Arch    string
+	Date    string
 	Commit  string
 )
 
@@ -22,6 +23,6 @@ var versionCmd = &cobra.Command{
 	Short: "Print the version information of gossl",
 	Long:  `All software has versions. This is gossl's`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("gossl version %s %s/%s %s\n", Version, Os, Arch, Commit)
+		fmt.Printf("gossl version %s %s/%s %s %s\n", Version, Os, Arch, Date, Commit)
 	},
 }
