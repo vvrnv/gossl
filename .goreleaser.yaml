@@ -5,90 +5,24 @@ before:
     # You may remove this if you don't use go modules.
     - go mod tidy
 builds:
-  - id: gossl-linux-amd
-    binary: gossl
+  - env:
+      - CGO_ENABLED=0
+    ldflags:
+    - -X github.com/vvrnv/gossl/cmd.Version={{ .Version }}
+    - -X github.com/vvrnv/gossl/cmd.Os={{ .Os }}
+    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Arch }}
+    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
+    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
     goos:
       - linux
-    goarch:
-      - amd64
-    ldflags:
-    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
-    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
-    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
-    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
-    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
-    env:
-      - CGO_ENABLED=0
-      - ARCH=amd64
-      - OS=linux
-
-  - id: gossl-linux-arm
-    binary: gossl
-    goos:
-      - linux
-    goarch:
-      - arm64
-    ldflags:
-    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
-    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
-    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
-    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
-    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
-    env:
-      - CGO_ENABLED=0
-      - ARCH=arm64
-      - OS=linux
-
-  - id: gossl-darwin-amd
-    binary: gossl
-    goos:
-      - darwin
-    goarch:
-      - amd64
-    ldflags:
-    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
-    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
-    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
-    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
-    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
-    env:
-      - CGO_ENABLED=0
-      - ARCH=amd64
-      - OS=darwin
-
-  - id: gossl-darwin-arm
-    binary: gossl
-    goos:
-      - darwin
-    goarch:
-      - arm64
-    ldflags:
-    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
-    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
-    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
-    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
-    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
-    env:
-      - CGO_ENABLED=0
-      - ARCH=arm64
-      - OS=darwin
-
-  - id: gossl-windows-amd
-    binary: gossl
-    goos:
       - windows
+      - darwin
     goarch:
+      - amd64
       - arm64
-    ldflags:
-    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
-    - -X github.com/vvrnv/gossl/cmd.Arch={{ .Env.ARCH }}
-    - -X github.com/vvrnv/gossl/cmd.Os={{ .Env.OS }}
-    - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
-    - -X github.com/vvrnv/gossl/cmd.Commit={{ .FullCommit }}
-    env:
-      - CGO_ENABLED=0
-      - ARCH=amd64
-      - OS=windows
+    ignore:
+      - goos: windows
+        goarch: arm64
 archives:
   - replacements:
       darwin: Darwin

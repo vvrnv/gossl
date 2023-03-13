@@ -7,7 +7,10 @@ import (
 	"github.com/vvrnv/gossl/internal/log"
 )
 
-var server string
+var (
+	server  string
+	timeout int
+)
 
 var verifyCmd = &cobra.Command{
 	Use:   "verify",
@@ -25,7 +28,7 @@ For example:
 		}
 
 		for _, ip := range ips {
-			err = certificate.GetCertificateInfo(ip, server)
+			err = certificate.GetCertificateInfo(ip, server, timeout)
 			if err != nil {
 				log.Error(err)
 			}
@@ -35,6 +38,7 @@ For example:
 
 func init() {
 	verifyCmd.Flags().StringVarP(&server, "server", "s", "", "enter domain name or ip address (required)")
+	verifyCmd.Flags().IntVarP(&timeout, "timeout", "t", 5, "enter timeout in seconds for verify command. (optional)")
 	verifyCmd.MarkFlagRequired("server")
 	rootCmd.AddCommand(verifyCmd)
 }
