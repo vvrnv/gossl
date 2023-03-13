@@ -57,7 +57,7 @@ func (c Certificate) getSigAlgorithm() string {
 	return c.SigAlgorithm
 }
 
-func SetTransport(host, ip string, timeout int) *Connection {
+func SetTransport(host, ip string, timeout, port int) *Connection {
 
 	transport := http.Transport{
 		Dial: (&net.Dialer{
@@ -72,8 +72,8 @@ func SetTransport(host, ip string, timeout int) *Connection {
 		DualStack: true,
 	}
 	transport.DialContext = func(ctx context.Context, network, addr string) (net.Conn, error) {
-		if addr == fmt.Sprintf("%s:443", host) {
-			addr = fmt.Sprintf("%s:443", ip)
+		if addr == fmt.Sprintf("%s:%d", host, port) {
+			addr = fmt.Sprintf("%s:%d", ip, port)
 		}
 		return dialer.DialContext(ctx, network, addr)
 	}
@@ -132,17 +132,17 @@ func certificateField(peerCertificates []*x509.Certificate, ip string) {
 	}
 }
 
-func GetCertificateInfo(ip string, host string, timeout int) error {
+func GetCertificateInfo(ip string, host string, timeout int, port int) error {
 
-	c := SetTransport(host, ip, timeout)
+	c := SetTransport(host, ip, timeout, port)
 	transport := c.transport
 
-	_, err := net.DialTimeout("tcp", fmt.Sprintf("%s:443", host), time.Duration(timeout)*time.Second)
+	_, err := net.DialTimeout("tcp", fmt.Sprintf("%s:%d", host, port), time.Duration(timeout)*time.Second)
 	if err != nil {
 		return log.Error(err)
 	}
 
-	conn, err := tls.Dial("tcp", fmt.Sprintf("%s:443", host), transport.TLSClientConfig)
+	conn, err := tls.Dial("tcp", fmt.Sprintf("%s:%d", host, port), transport.TLSClientConfig)
 	if err != nil {
 		return log.Error(err)
 	}

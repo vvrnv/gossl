@@ -10,6 +10,7 @@ import (
 var (
 	server  string
 	timeout int
+	port    int
 )
 
 var verifyCmd = &cobra.Command{
@@ -28,7 +29,7 @@ For example:
 		}
 
 		for _, ip := range ips {
-			err = certificate.GetCertificateInfo(ip, server, timeout)
+			err = certificate.GetCertificateInfo(ip, server, timeout, port)
 			if err != nil {
 				log.Error(err)
 			}
@@ -39,6 +40,7 @@ For example:
 func init() {
 	verifyCmd.Flags().StringVarP(&server, "server", "s", "", "enter domain name or ip address (required)")
 	verifyCmd.Flags().IntVarP(&timeout, "timeout", "t", 5, "enter timeout in seconds for verify command. (optional)")
+	verifyCmd.Flags().IntVarP(&port, "port", "p", 443, "enter SSL port for verify command. (optional)")
 	verifyCmd.MarkFlagRequired("server")
 	rootCmd.AddCommand(verifyCmd)
 }
