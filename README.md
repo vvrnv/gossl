@@ -61,6 +61,7 @@ gossl completion [bash | fish | powershell | zsh]
 ```sh
 gossl verify -s [dnsName | ipAddress]
 gossl verify --server [dnsName | ipAddress]
+gossl verify -s [dnsName | ipAddress] -o json
 gossl verify -s [dnsName | ipAddress] -p 8443
 gossl verify -s [dnsName | ipAddress] --timeout 25
 ```
