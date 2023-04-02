@@ -8,7 +8,7 @@ builds:
   - env:
       - CGO_ENABLED=0
     ldflags:
-    - -X github.com/vvrnv/gossl/cmd.Version={{ .Tag }}
+    - -X github.com/vvrnv/gossl/cmd.Tag={{ .Tag }}
     - -X github.com/vvrnv/gossl/cmd.Os={{ .Os }}
     - -X github.com/vvrnv/gossl/cmd.Arch={{ .Arch }}
     - -X github.com/vvrnv/gossl/cmd.Date={{ .Date }}
