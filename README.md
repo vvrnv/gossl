@@ -6,7 +6,7 @@
 <a href="https://pkg.go.dev/github.com/vvrnv/gossl"><img src="https://pkg.go.dev/badge/github.com/vvrnv/gossl.svg" alt="Go Version"></a><br>
 </p>
 
-Simple CLI app for checking SSL certificates written with Go
+Simple CLI app for checking SSL certificates written in Go
 
 ## Installation
 
