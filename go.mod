@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/fatih/color v1.18.0
 	github.com/spf13/cobra v1.10.1
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.27.1
 )
 
 require (
